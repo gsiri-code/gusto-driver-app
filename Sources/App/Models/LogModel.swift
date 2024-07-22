@@ -14,14 +14,14 @@ import Foundation
 final class Log:Model,Content{
     static let schema: String = "log"
     
-    @ID(key:.id)
-    var id:UUID?
+    @ID(custom:"id",generatedBy: .database)
+    var id:Int?
     
-    @Field(key:"driver_name")
-    var driver_name:String
+    @Field(key:"driver_id")
+    var driver_id:UUID
     
     @Field(key:"location")
-    var location:String
+    var address:String
     
     @Field(key:"remark")
     var remark:String
@@ -31,10 +31,10 @@ final class Log:Model,Content{
     
     init(){}
     
-    init(id:UUID? = nil,driver_name:String,location:String,remark:String,deliver_date: Date?){
+    init(id:Int,driver_id:UUID,address:String,remark:String,deliver_date: Date = Date.now){
         self.id = id
-        self.driver_name = driver_name
-        self.location = location
+        self.driver_id = driver_id
+        self.address = address
         self.remark = remark
         self.deliver_date = deliver_date
     }
