@@ -18,7 +18,7 @@ final class Driver: Model, Content{
 
     init(){}
 
-    init(id: UUID? = nil) {
+    init(id: UUID? = nil,name: String,password: String) {
         self.id = id
         self.name = name
         self.password = password
