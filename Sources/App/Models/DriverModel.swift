@@ -16,9 +16,9 @@ final class Driver: Model, Content{
     @Field(key: "password")
     var password: String
 
-    init() { }
+    init(){}
 
-    init(id: UUID? = nil, title: String) {
+    init(id: UUID? = nil) {
         self.id = id
         self.name = name
         self.password = password

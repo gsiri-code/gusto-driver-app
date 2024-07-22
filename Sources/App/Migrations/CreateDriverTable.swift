@@ -10,7 +10,6 @@ struct DriverMigration: AsyncMigration {
             .id()
             .field("name", .string, .required)
             .field("password", .string, .required)
-            .unique(on:"name")
             .create()
     }
 
