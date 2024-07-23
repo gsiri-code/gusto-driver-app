@@ -11,7 +11,10 @@ struct LogMigration:AsyncMigration{
             .field("address",.string,.required)
             .field("deliver_date",.datetime,.required)
             .field("remarks",.string)
+            .ignoreExisting()
             .create()
+            
+        
     }
     
     func revert(on database:Database) async throws{

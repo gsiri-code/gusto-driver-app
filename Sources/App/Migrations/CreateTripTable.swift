@@ -16,7 +16,9 @@ struct TripMigration:AsyncMigration{
             .field("progress",.string)
             .field("pick",.int)
             .field("qty",.int)
+            .ignoreExisting()
             .create()
+            
 
     }
     

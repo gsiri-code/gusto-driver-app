@@ -10,7 +10,9 @@ struct DriverMigration: AsyncMigration {
             .id()
             .field("name", .string, .required)
             .field("password", .string, .required)
+            .ignoreExisting()
             .create()
+            
     }
 
     func revert(on database: Database) async throws  { //Used to delete movies table
