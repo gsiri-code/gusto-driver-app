@@ -8,9 +8,9 @@
 import Fluent
 import struct Foundation.UUID
 import Vapor
-import Foundation
 
-final class Trip: Model, Content{
+
+final class Trip: Model{
     static let schema: String = "trip"
     
     @ID(custom:"id",generatedBy: .database)

@@ -1,5 +1,6 @@
 import Foundation
 import Fluent
+import Vapor
 
 
 struct TripMigration:AsyncMigration{
