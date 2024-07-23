@@ -1,6 +1,6 @@
 //
 //  File.swift
-//  
+//
 //
 //  Created by George Sirichartchai on 7/22/24.
 //
@@ -13,8 +13,8 @@ import Foundation
 final class Trip: Model, Content{
     static let schema: String = "trip"
     
-    @ID(key:.id)
-    var id:UUID?
+    @ID(custom:"id",generatedBy: .database)
+    var id:Int?
     
     @Field(key:"trip_name")
     var trip_name:String
@@ -25,8 +25,8 @@ final class Trip: Model, Content{
     @Field(key: "ship_via")
     var ship_via:String
     
-    @Field(key: "driver")
-    var driver:String
+    @Field(key: "driver_id")
+    var driver:UUID
     
     @Field(key:"total_weight")
     var total_weight:Double
@@ -45,7 +45,8 @@ final class Trip: Model, Content{
     
     init(){}
     
-    init(id: UUID? = nil, trip_name: String, ship_date: Date, ship_via: String, driver: String, total_weight: Double, remark: String, progress: String, pick: Int, qty: Int) {
+    init    (id:Int?=nil,trip_name:String,ship_date:Date,ship_via:String,driver:UUID,total_weight:Double,remark:String,progress:String
+                 ,pick:Int,qty:Int){
         self.id = id
         self.trip_name = trip_name
         self.ship_date = ship_date
@@ -58,5 +59,7 @@ final class Trip: Model, Content{
         self.qty = qty
     }
     
-   
+    
+    
+    
 }
