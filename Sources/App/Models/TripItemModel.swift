@@ -13,8 +13,8 @@ import Vapor
 final class TripItem:Model,Content{
     static let schema = "trip_item"
     
-    @ID(key: .id)
-    var id: UUID?
+    @ID(custom:"id",generatedBy: .database)
+    var id:Int?
     
     @Field(key: "company")
     var company:String
@@ -37,12 +37,15 @@ final class TripItem:Model,Content{
     @Field(key:"invoice_no")
     var invoice_no:String
     
-    @Field(key:"trip")
-    var trip:String
+    @Field(key:"trip_id")
+    var trip_id:Int
+    
+    @Field(key: "remarks")
+    var remarks:String
     
     init() {}
     
-    init(id: UUID? = nil, company: String, stop_no: String, rep: String, total_weight: Int, pick: Int, qty: Int, invoice_no: String, trip: String) {
+    init(id: Int? = nil, company: String, stop_no: String, rep: String, total_weight: Int, pick: Int, qty: Int, invoice_no: String, trip_id: Int,remarks:String) {
         self.id = id
         self.company = company
         self.stop_no = stop_no
@@ -51,6 +54,7 @@ final class TripItem:Model,Content{
         self.pick = pick
         self.qty = qty
         self.invoice_no = invoice_no
-        self.trip = trip
+        self.trip_id = trip_id
+        self.remarks = remarks
     }
 }
