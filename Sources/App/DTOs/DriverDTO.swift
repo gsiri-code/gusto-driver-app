@@ -1,10 +1,3 @@
-//
-//  File.swift
-//  
-//
-//  Created by George Sirichartchai on 7/22/24.
-//
-
 import Foundation
 import Fluent
 import Vapor

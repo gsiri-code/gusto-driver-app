@@ -13,7 +13,8 @@ public func configure(_ app: Application) async throws {
         database: "postgres",
         tls: .prefer(try .init(configuration: .clientDefault)))
     ), as: .psql)
-
+    
+    // Schema Builders
     app.migrations.add(DriverMigration())
     app.migrations.add(TripMigration())
     app.migrations.add(LogMigration())
