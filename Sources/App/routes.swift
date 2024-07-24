@@ -5,6 +5,10 @@ import Vapor
 func routes(_ app: Application) throws {
     
     try app.register(collection: DriversController())
+    try app.register(collection:LogController())
+
+    
+    
     
 
 }
