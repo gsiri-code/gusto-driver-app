@@ -1,7 +1,5 @@
 import Vapor
 
-
-
 struct DriversController: RouteCollection{
     func boot(routes:RoutesBuilder)throws{
         let driver = routes.grouped("driver")
@@ -42,8 +40,6 @@ struct DriversController: RouteCollection{
             throw Abort(.notFound)
         }
         let updatedDriver = try req.content.decode(Driver.self)
-        
-        driver.id = updatedDriver.id
         driver.name = updatedDriver.name
         driver.password = updatedDriver.password
         
