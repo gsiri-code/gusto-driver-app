@@ -11,7 +11,7 @@ import Vapor
 
 
 
-final class Log:Model{
+final class Log:Model, Content{
     static let schema: String = "log"
     
     @ID(custom:"id",generatedBy: .database)
@@ -23,13 +23,13 @@ final class Log:Model{
     @Field(key:"driver_id")
     var driver_id:UUID
     
-    @Field(key:"location")
+    @Field(key:"address")
     var address:String
     
-    @Field(key:"remark")
+    @Field(key:"remarks")
     var remark:String
     
-    @Timestamp(key: "deliver_date", on: .create, format: .iso8601)
+    @Timestamp(key: "deliver_date", on: .create, format: .default)
     var deliver_date: Date?
     
     init(){}
