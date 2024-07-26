@@ -7,7 +7,7 @@
 
 
 import Vapor
-
+import Fluent
 
 
 struct LogController: RouteCollection{
@@ -21,6 +21,9 @@ struct LogController: RouteCollection{
             log.put(use:update)
             log.patch(use:edit)
             log.delete(use:delete)
+            log.get("img",use:getImg)
+            log.post("img",":src",use:addImg)
+            log.delete("img",":ImgId",use:delImg)
         }
         
     }
@@ -30,6 +33,10 @@ struct LogController: RouteCollection{
         let log = try req.content.decode(Log.self)
         try await log.save(on:req.db)
         return log
+    }
+    @Sendable func create(req: Request) throws -> EventLoopFuture<Log> {
+        let log = try req.content.decode(Log.self)
+        return log.save(on: req.db).map { log }
     }
     
     // GET
@@ -81,6 +88,50 @@ struct LogController: RouteCollection{
             throw Abort(.notFound)
         }
         try await log.delete(on: req.db)
+        return .ok
+    }
+    
+    // IMG OPERATIONS
+    
+    // GET imgs
+    @Sendable func getImg(req:Request) async throws -> [Img]{
+        
+        let stringLogId = req.parameters.get("id")
+        
+        let LogId = Int(stringLogId!)!
+
+        guard let res =  try await Log.query(on: req.db).filter(\.$id == LogId).with(\.$Imgs).first() else{
+            throw Abort(.notFound)
+        }
+        
+        return res.Imgs
+        
+    }
+    
+    // Add new imgs
+    @Sendable func addImg(req:Request) async throws -> Log {
+        let stringLogId = req.parameters.get("id")
+        let newSrc = req.parameters.get("src")!
+        
+        let LogId = Int(stringLogId!)!
+
+        guard let log =  try await Log.query(on: req.db).filter(\.$id == LogId).with(\.$Imgs).first() else{
+            throw Abort(.notFound)
+        }
+        
+        let newImg = Img(log_id: LogId, src:newSrc)
+        try await log.$Imgs.create(newImg, on: req.db)
+        
+        try await log.save(on: req.db)
+        return log
+    }
+    
+    // Delete Images
+    @Sendable func delImg(req:Request) async throws -> HTTPStatus {
+        guard let img = try await Img.find(req.parameters.get("ImgId"), on: req.db) else {
+            throw Abort(.notFound)
+        }
+        try await img.delete(on: req.db)
         return .ok
     }
 }
