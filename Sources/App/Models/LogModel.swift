@@ -1,6 +1,6 @@
 //
 //  File.swift
-//  
+//
 //
 //  Created by George Sirichartchai on 7/22/24.
 //
@@ -8,7 +8,6 @@
 import Fluent
 import struct Foundation.UUID
 import Vapor
-
 
 
 final class Log:Model, Content{
@@ -32,6 +31,10 @@ final class Log:Model, Content{
     @Timestamp(key: "deliver_date", on: .create, format: .default)
     var deliver_date: Date?
     
+    @Children(for:\.$log)
+        var Imgs:[Img]
+    
+    
     init(){}
     
     init(id:Int?=nil,trip_id:Int,driver_id:UUID,address:String,remark:String,deliver_date: Date = Date.now){
@@ -42,4 +45,5 @@ final class Log:Model, Content{
         self.remark = remark
         self.deliver_date = deliver_date
     }
+
 }
