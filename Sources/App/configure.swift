@@ -15,10 +15,13 @@ public func configure(_ app: Application) async throws {
     ), as: .psql)
     
     // Schema Builders
+    
     app.migrations.add(DriverMigration())
     app.migrations.add(TripMigration())
     app.migrations.add(LogMigration())
+    app.migrations.add(LogImageMigration())
     app.migrations.add(TripItemMigration())
+    
 
     try routes(app)
 }
