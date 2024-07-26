@@ -13,16 +13,9 @@ struct LogMigration:AsyncMigration{
             .field("remarks",.string)
             .ignoreExisting()
             .create()
-            
-        
     }
     
     func revert(on database:Database) async throws{
-        
         try await database.schema("log").delete()
-
-        
     }
-    
-        
 }
