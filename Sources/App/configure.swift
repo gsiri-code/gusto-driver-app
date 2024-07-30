@@ -26,6 +26,8 @@ public func configure(_ app: Application) async throws {
     app.migrations.add(LogImageMigration())
     app.migrations.add(TripItemMigration())
     app.migrations.add(StaffMigration())
+    app.migrations.add(StaffTokenMigration())
+
     
 
     try routes(app)

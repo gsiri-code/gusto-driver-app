@@ -45,3 +45,5 @@ struct StaffController: RouteCollection{
         return try await Staff.query(on: req.db).all()
     }
 }
+
+
