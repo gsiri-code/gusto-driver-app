@@ -3,6 +3,8 @@ import Fluent
 import FluentPostgresDriver
 import Vapor
 
+
+
 public func configure(_ app: Application) async throws {
 
     app.databases.use(DatabaseConfigurationFactory.postgres(configuration: .init(
@@ -14,6 +16,8 @@ public func configure(_ app: Application) async throws {
         tls: .prefer(try .init(configuration: .clientDefault)))
     ), as: .psql)
     
+
+    
     // Schema Builders
     
     app.migrations.add(DriverMigration())
@@ -21,6 +25,7 @@ public func configure(_ app: Application) async throws {
     app.migrations.add(LogMigration())
     app.migrations.add(LogImageMigration())
     app.migrations.add(TripItemMigration())
+    app.migrations.add(StaffMigration())
     
 
     try routes(app)
